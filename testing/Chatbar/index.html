@@ -5,7 +5,7 @@
 <script src='//production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'></script>
  -->
  <!-- <meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" /><link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" /><link rel="canonical" href="http://codepen.io/anon/pen/QpzWpO" /> -->
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"> -->
 <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" type="text/css" href="style.css">
 	<script type="text/javascript" src="main.js"></script>
@@ -131,6 +131,7 @@ body {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  max-width: 9rem;
 }
 .contact__status {
   position: absolute;
@@ -225,7 +226,7 @@ svg {
   left: 0;
   width: 100%;
   height: 0.5rem;
-  background: #1CC6AE;
+  background: #F44336;
   width: 0;
   -webkit-transition: width 0.2s;
   transition: width 0.2s;
@@ -278,8 +279,11 @@ svg {
   font-size: 2rem;
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
   color: #36343D;
+  text-overflow: ellipsis;
+  max-width: 19rem;
+  overflow: hidden;
 }
-.chat__online {
+/*.chat__online {
   position: absolute;
   top: 50%;
   left: -1.5rem;
@@ -292,9 +296,11 @@ svg {
   -webkit-transition: opacity 0.3s;
   transition: opacity 0.3s;
 }
+
 .chat__online.active {
   opacity: 1;
 }
+*/
 .chat__messages {
   position: absolute;
   top: 7.5rem;
@@ -329,6 +335,9 @@ svg {
   float: right;
   color: #23244E;
   background: #E9EAF3;
+}
+.chat.active.isOnline:before {
+	background-color: #1CC6AE;
 }
 .chat__input {
   position: absolute;
@@ -392,12 +401,72 @@ svg {
 </style></head><body>
 <div class="demo">
   <svg class="sidebar">
-    <path class="s-path" fill="#fff" d="M0,0 50,0 a0,250 0 1,1 0,500 L0, 500"/>
+    <path class="s-path" fill="#fff"/>
   </svg>
 <!--   <div class="static">
     <div class="static__text">Pull white sidebar to the right</div>
   </div>
- -->  <div class="sidebar-content" style="overflow-y: auto;">
+ -->  <div class="sidebar-content" style="overflow-y: auto; height: calc(100% - 5rem);">
+    <div class="contact">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
+      <span class="contact__name">Kshitij Gupta</span>
+      <span class="contact__status online"></span>
+    </div>
+    <div class="contact">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
+      <span class="contact__name">Kshitij Gupta</span>
+      <span class="contact__status online"></span>
+    </div>
+    <div class="contact">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
+      <span class="contact__name">Kshitij Gupta</span>
+      <span class="contact__status online"></span>
+    </div>
+    <div class="contact">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
+      <span class="contact__name">Kshitij Gupta</span>
+      <span class="contact__status online"></span>
+    </div>
+    <div class="contact">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
+      <span class="contact__name">Kshitij Gupta</span>
+      <span class="contact__status online"></span>
+    </div>
+    <div class="contact">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
+      <span class="contact__name">Kshitij Gupta</span>
+      <span class="contact__status online"></span>
+    </div>
+    <div class="contact">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
+      <span class="contact__name">Kshitij Gupta</span>
+      <span class="contact__status online"></span>
+    </div>
+    <div class="contact">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
+      <span class="contact__name">Kshitij Gupta</span>
+      <span class="contact__status online"></span>
+    </div>
+    <div class="contact">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
+      <span class="contact__name">Kshitij Gupta</span>
+      <span class="contact__status online"></span>
+    </div>
+    <div class="contact">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
+      <span class="contact__name">Kshitij Gupta</span>
+      <span class="contact__status online"></span>
+    </div>
+    <div class="contact">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
+      <span class="contact__name">Kshitij Gupta</span>
+      <span class="contact__status online"></span>
+    </div>
+    <div class="contact">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
+      <span class="contact__name">Kshitij Gupta</span>
+      <span class="contact__status online"></span>
+    </div>
     <div class="contact">
       <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
       <span class="contact__name">Kshitij Gupta</span>
@@ -450,11 +519,11 @@ svg {
       <input type="text" class="search__input" placeholder="Search" />
     </div>
   </div>
-  <div class="chat">
+  <div class="chat" id="chatbar">
     <span class="chat__back"></span>
     <span class="chat__status">status</span>
+    <!-- <span class="chat__online active"></span> -->
     <div class="chat__person">
-      <span class="chat__online active"></span>
       <span class="chat__name">Huehue Huehue</span>
     </div>
     <div class="chat__messages">
@@ -554,6 +623,10 @@ svg {
       <div class="chat__msgRow">
         <div class="chat__message notMine">Hey!</div>
       </div>
+      <div class="chat__msgRow">
+      </div>
+      <div class="chat__msgRow">
+      </div>
     </div>
     <input type="text" class="chat__input" placeholder="Your message" />
   </div>
@@ -578,14 +651,46 @@ svg {
       animating = false,
       height = $(window).height();
 
+      var scroll_pos = 	$(".sidebar-content").scrollTop();
+	$(".sidebar-content").scrollTop(scroll_pos + 1500);
+  var startD = createD(50,0,1),
+      midD = createD(125,75,0),
+      finalD = createD(200,0,1),
+      clickMidD = createD(300,80,0),
+      clickMidDRev = createD(200,100,1),
+      clickD = createD(300,0,1),
+      currentPath = startD;
+
+		$path.attr({
+			"d": "M0,0 50,0 a0," + (height>>1) + " 0 1,1 0," + height + " L0," + height,
+		});
+
+		var resizePath = function(path) {
+			if (path === undefined)
+				return;
+			path = path.replace(/,(\d+) 0 1,/gi, "," + (height >> 1) + " 0 1,");
+			path = path.replace(/0,(\d+) L0,(\d+)/gi, "0," + height + " L0," + height);
+			return path;
+		}
+
       var updateChatbar = function() {
-		  $path.attr({
-		  	 "d": "M0,0 50,0 a0," + height/2 + " 0 1,1 0," + height + " L0, " + height,
-		  });
-		
+	    var d = $path.attr("d");
+
+	    startD = resizePath(startD);
+		midD = resizePath(midD);
+		finalD = resizePath(finalD);
+		clickMidD = resizePath(clickMidD);
+		clickMidDRev = resizePath(clickMidDRev);
+		clickD = resizePath(clickD);
+		currentPath = resizePath(currentPath);
+
+		$path.attr({
+			"d": resizePath(d)
+		});
+
 		  $svg.attr({
 			  "viewBox": "0 0 300 " + height
-		  });      	
+		  });
       };
       updateChatbar();
 
@@ -602,20 +707,13 @@ svg {
   };
 
   function createD(top, ax, dir) {
-    return "M0,0 "+top+",0 a"+ax+"," + height/2 + " 0 1,"+dir+" 0," + height + " L0," + height + "";
+    return "M0,0 " + top + ",0 a" + ax + "," + (height>>1) + " 0 1,"+dir+" 0," + height + " L0," + height;
   }
 
-  var startD = createD(50,0,1),
-      midD = createD(125,75,0),
-      finalD = createD(200,0,1),
-      clickMidD = createD(300,80,0),
-      clickMidDRev = createD(200,100,1),
-      clickD = createD(300,0,1),
-      currentPath = startD;
 
   function newD(num1, num2) {
     var d = $path.attr("d"),
-        num2 = num2 || height/2,
+        num2 = num2 || ((height>>1)).toString(),
         nd = d.replace(/\ba(\d+),(\d+)\b/gi, "a" + num1 + "," + num2);
     return nd;
   }
@@ -641,7 +739,7 @@ svg {
       nextTop = easingTop(curStep, oldTop, topDiff, steps);
       nextX = easingX(curStep, curX, finalX-curX, steps);
       oldArr[1] = nextTop + ",0";
-      oldArr[2] = "a" + Math.abs(nextX) + "," + height/2 + "";
+      oldArr[2] = "a" + Math.abs(nextX) + "," + (height>>1) + "";
       oldArr[4] = (nextX >= 0) ? "1,1" : "1,0";
       $path.attr("d", oldArr.join(" "));
       if (curStep > steps) {
@@ -659,7 +757,6 @@ svg {
   }
 
   function handlers1() {
-
     $(document).on("mousedown touchstart", ".s-path", function(e) {
       var startX =  e.pageX || e.originalEvent.touches[0].pageX;
 
@@ -745,8 +842,13 @@ svg {
         name = $(this).find(".contact__name").text(),
         online = $(this).find(".contact__status").hasClass("online");
     $(".chat__name").text(name);
-    $(".chat__online").removeClass("active");
-    if (online) $(".chat__online").addClass("active");
+    // $(".chat__online").removeClass("active");
+	$('#chatbar').removeClass('isOnline');
+
+    if (online) {
+    	// $(".chat__online").addClass("active");
+    	$('#chatbar').addClass('isOnline');
+    }
     ripple($(that),e);
     setTimeout(function() {
       $sCont.removeClass("active");
