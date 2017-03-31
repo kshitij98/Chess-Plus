@@ -18,6 +18,49 @@ button, input {
 body {
   background: linear-gradient( 45deg, #636F85, #6960A0);
 }
+.unreadBadge:after {
+  position: absolute;
+  content: attr(badge-data);
+  background-color: #ff4081;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  top: 8%;
+  right: 72%;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 600;
+  font-size: 9.4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  color: #FFF;
+}
+.contact__status {
+  position: absolute;
+  background-color: #00B570;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  top: 70%;
+  right: 87.1%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  /*color: #FFF;*/
+  border: 2px solid #FFF;
+  opacity: 0;
+  /*border-width: 2px; */
+}
+.contact__status.online {
+  opacity: 1;
+}
+
 .demo {
   position: absolute;
   top: 50%;

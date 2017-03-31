@@ -12,7 +12,38 @@ $(document).ready(function() {
       frame = 1000 / 60,
       animTime = 600,
       sContTrans = 200,
-      animating = false;
+      animating = false,
+      height = $(window).height();
+
+  var startD = createD(64,0,1),
+      midD = createD(125,75,0),
+      finalD = createD(200,0,1),
+      clickMidD = createD(300,80,0),
+      clickMidDRev = createD(200,100,1),
+      clickD = createD(300,0,1),
+      currentPath = startD;
+      $path.attr({ "d": startD });
+
+  var resizePath = function(path) {
+      if (path === undefined)
+        return;
+      path = path.replace(/,(\d+) 0 1,/gi, "," + (height >> 1) + " 0 1,");
+      path = path.replace(/0,(\d+) L0,(\d+)/gi, "0," + height + " L0," + height);
+      return path;
+  }
+
+  var updatePathHeight = function() {
+    height = $(window).height();
+    var d = $path.attr("d");
+    startD = resizePath(startD);
+    midD = resizePath(midD);
+    finalD = resizePath(finalD);
+    clickMidD = resizePath(clickMidD);
+    clickMidDRev = resizePath(clickMidDRev);
+    clickD = resizePath(clickD);
+    currentPath = resizePath(currentPath);
+    $path.attr({ "d": resizePath(d) });
+  };
 
   var easings = {
     smallElastic: function(t,b,c,d) {
@@ -27,20 +58,12 @@ $(document).ready(function() {
   };
 
   function createD(top, ax, dir) {
-    return "M0,0 "+top+",0 a"+ax+",250 0 1,"+dir+" 0,500 L0,500";
+    return "M0,0 " + top + ",0 a" + ax + "," + (height>>1) + " 0 1,"+dir+" 0," + height + " L0," + height;
   }
-
-  var startD = createD(50,0,1),
-      midD = createD(125,75,0),
-      finalD = createD(200,0,1),
-      clickMidD = createD(300,80,0),
-      clickMidDRev = createD(200,100,1),
-      clickD = createD(300,0,1),
-      currentPath = startD;
 
   function newD(num1, num2) {
     var d = $path.attr("d"),
-        num2 = num2 || 250,
+        num2 = num2 || ((height>>1)).toString(),
         nd = d.replace(/\ba(\d+),(\d+)\b/gi, "a" + num1 + "," + num2);
     return nd;
   }
@@ -66,7 +89,7 @@ $(document).ready(function() {
       nextTop = easingTop(curStep, oldTop, topDiff, steps);
       nextX = easingX(curStep, curX, finalX-curX, steps);
       oldArr[1] = nextTop + ",0";
-      oldArr[2] = "a" + Math.abs(nextX) + ",250";
+      oldArr[2] = "a" + Math.abs(nextX) + "," + (height>>1) + "";
       oldArr[4] = (nextX >= 0) ? "1,1" : "1,0";
       $path.attr("d", oldArr.join(" "));
       if (curStep > steps) {
@@ -84,7 +107,6 @@ $(document).ready(function() {
   }
 
   function handlers1() {
-
     $(document).on("mousedown touchstart", ".s-path", function(e) {
       var startX =  e.pageX || e.originalEvent.touches[0].pageX;
 
@@ -113,7 +135,6 @@ $(document).ready(function() {
         });
       }
     });
-
   }
 
   handlers1();
@@ -170,9 +191,12 @@ $(document).ready(function() {
         name = $(this).find(".contact__name").text(),
         online = $(this).find(".contact__status").hasClass("online");
     $(".chat__name").text(name);
-    $(".chat__online").removeClass("active");
-    if (online) $(".chat__online").addClass("active");
+    $('#chatbar').removeClass('isOnline');
+
+    if (online)
+      $('#chatbar').addClass('isOnline');
     ripple($(that),e);
+
     setTimeout(function() {
       $sCont.removeClass("active");
       moveImage(that);
@@ -188,7 +212,7 @@ $(document).ready(function() {
             $chat.addClass("active");
             animating = false;
           });
-        }, "inCubic");
+        }, "inCubic"); 
       }, sContTrans);
     }, sContTrans);
   });
@@ -217,6 +241,6 @@ $(document).ready(function() {
   $(window).on("resize", function() {
     demoTop = $demo.offset().top;
     demoLeft = $demo.offset().left;
+    updatePathHeight();
   });
-
 });

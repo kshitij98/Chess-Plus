@@ -8,10 +8,14 @@
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"> -->
 <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" type="text/css" href="style.css">
-	<script type="text/javascript" src="main.js"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
 	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 	<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
 <style class="cp-pen-styles">
 *, *:before, *:after {
   box-sizing: border-box;
@@ -45,13 +49,12 @@ body {
   /*box-shadow: 0 1rem 5rem rgba(0, 0, 0, 0.3);*/
 }
 
-.static {
+.arrow {
   height: 100%;
   font-size: 1.8rem;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  background: #6D7ADA;
+  z-index: -100;
 }
-.static:before, .static:after {
+.arrow:before, .arrow:after {
   content: "";
   position: absolute;
   left: 7rem;
@@ -67,27 +70,12 @@ body {
   -webkit-animation: arrows 1.5s infinite;
           animation: arrows 1.5s infinite;
 }
-.static:before {
-  top: 15rem;
+.arrow:before {
+  top: 30%;
 }
-.static:after {
-  top: 35rem;
+.arrow:after {
+  top: 70%;
 }
-.static__text {
-  width: 9rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -5rem;
-  -webkit-transform: translate3d(0, -50%, 0);
-          transform: translate3d(0, -50%, 0);
-  color: #fff;
-  -webkit-perspective: 1px;
-          perspective: 1px;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-}
-
 .sidebar-content {
   z-index: -1;
   position: absolute;
@@ -131,9 +119,9 @@ body {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  max-width: 9rem;
+  width: 12rem;
 }
-.contact__status {
+/*.contact__status {
   position: absolute;
   top: 2.1rem;
   right: 1.5rem;
@@ -148,7 +136,7 @@ body {
 .contact__status.online {
   opacity: 1;
 }
-
+*/
 .search {
   position: absolute;
   bottom: 0;
@@ -403,6 +391,7 @@ svg {
   <svg class="sidebar">
     <path class="s-path" fill="#fff"/>
   </svg>
+  <div class="arrow"> </div>
 <!--   <div class="static">
     <div class="static__text">Pull white sidebar to the right</div>
   </div>
@@ -410,9 +399,24 @@ svg {
     <div class="contact">
       <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
       <span class="contact__name">Kshitij Gupta</span>
-      <span class="contact__status online"></span>
+      <span class="unreadBadge" badge-data="2"> </span>
+      <span class="contact__status online"> </span>
     </div>
     <div class="contact">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
+      <span class="contact__name">Kshitij Gupta</span>
+      <span class="contact__status online"> </span>
+    </div>
+    <div class="contact">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
+      <span class="contact__name">Kshitij Gupta</span>
+      <div class="unreadBadge" badge-data="2"> </div>
+    </div>
+    <div class="contact">
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
+      <span class="contact__name">A Very very very very very big name</span>
+    </div>
+     <div class="contact">
       <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
       <span class="contact__name">Kshitij Gupta</span>
       <span class="contact__status online"></span>
@@ -451,31 +455,13 @@ svg {
       <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
       <span class="contact__name">Kshitij Gupta</span>
       <span class="contact__status online"></span>
-    </div>
-    <div class="contact">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
-      <span class="contact__name">Kshitij Gupta</span>
-      <span class="contact__status online"></span>
-    </div>
-    <div class="contact">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
-      <span class="contact__name">Kshitij Gupta</span>
-      <span class="contact__status online"></span>
-    </div>
-    <div class="contact">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
-      <span class="contact__name">Kshitij Gupta</span>
-      <span class="contact__status online"></span>
-    </div>
-    <div class="contact">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
-      <span class="contact__name">Kshitij Gupta</span>
-      <span class="contact__status online"></span>
+      <div class="unreadBadge" badge-data="1"> </div>
     </div>
     <div class="contact">
       <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-girl.png" alt="" class="contact__photo" />
       <span class="contact__name">Natalie Portman</span>
       <span class="contact__status online"></span>
+      <div class="unreadBadge" badge-data="1"> </div>
     </div>
     <div class="contact">
       <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/elastic-man.png" alt="" class="contact__photo" />
@@ -633,273 +619,5 @@ svg {
 </div>
 <!-- <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script> -->
 <!-- <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
-
-<script>$(document).ready(function() {
-  var $svg = $(".sidebar"),
-      $demo = $(".demo"),
-      $path = $(".s-path"),
-      $sCont = $(".sidebar-content"),
-      $chat = $(".chat"),
-      demoTop = $demo.offset().top,
-      demoLeft = $demo.offset().left,
-      diffX = 0,
-      curX = 0,
-      finalX = 0,
-      frame = 1000 / 60,
-      animTime = 600,
-      sContTrans = 200,
-      animating = false,
-      height = $(window).height();
-
-      var scroll_pos = 	$(".sidebar-content").scrollTop();
-	$(".sidebar-content").scrollTop(scroll_pos + 1500);
-  var startD = createD(50,0,1),
-      midD = createD(125,75,0),
-      finalD = createD(200,0,1),
-      clickMidD = createD(300,80,0),
-      clickMidDRev = createD(200,100,1),
-      clickD = createD(300,0,1),
-      currentPath = startD;
-
-		$path.attr({
-			"d": "M0,0 50,0 a0," + (height>>1) + " 0 1,1 0," + height + " L0," + height,
-		});
-
-		var resizePath = function(path) {
-			if (path === undefined)
-				return;
-			path = path.replace(/,(\d+) 0 1,/gi, "," + (height >> 1) + " 0 1,");
-			path = path.replace(/0,(\d+) L0,(\d+)/gi, "0," + height + " L0," + height);
-			return path;
-		}
-
-      var updateChatbar = function() {
-	    var d = $path.attr("d");
-
-	    startD = resizePath(startD);
-		midD = resizePath(midD);
-		finalD = resizePath(finalD);
-		clickMidD = resizePath(clickMidD);
-		clickMidDRev = resizePath(clickMidDRev);
-		clickD = resizePath(clickD);
-		currentPath = resizePath(currentPath);
-
-		$path.attr({
-			"d": resizePath(d)
-		});
-
-		  $svg.attr({
-			  "viewBox": "0 0 300 " + height
-		  });
-      };
-      updateChatbar();
-
-  var easings = {
-    smallElastic: function(t,b,c,d) {
-      var ts = (t/=d)*t;
-      var tc = ts*t;
-      return b+c*(33*tc*ts + -106*ts*ts + 126*tc + -67*ts + 15*t);
-    },
-    inCubic: function(t,b,c,d) {
-      var tc = (t/=d)*t*t;
-      return b+c*(tc);
-    }
-  };
-
-  function createD(top, ax, dir) {
-    return "M0,0 " + top + ",0 a" + ax + "," + (height>>1) + " 0 1,"+dir+" 0," + height + " L0," + height;
-  }
-
-
-  function newD(num1, num2) {
-    var d = $path.attr("d"),
-        num2 = num2 || ((height>>1)).toString(),
-        nd = d.replace(/\ba(\d+),(\d+)\b/gi, "a" + num1 + "," + num2);
-    return nd;
-  }
-
-  function animatePathD(path, d, time, handlers, callback, easingTop, easingX) {
-    var steps = Math.floor(time / frame),
-        curStep = 0,
-        oldArr = currentPath.split(" "),
-        newArr = d.split(" "),
-        oldLen = oldArr.length,
-        newLen = newArr.length,
-        oldTop = +oldArr[1].split(",")[0],
-        topDiff = +newArr[1].split(",")[0] - oldTop,
-        nextTop,
-        nextX,
-        easingTop = easings[easingTop] || easings.smallElastic,
-        easingX = easings[easingX] || easingTop;
-
-    $(document).off("mousedown mouseup");
-
-    function animate() {
-      curStep++;
-      nextTop = easingTop(curStep, oldTop, topDiff, steps);
-      nextX = easingX(curStep, curX, finalX-curX, steps);
-      oldArr[1] = nextTop + ",0";
-      oldArr[2] = "a" + Math.abs(nextX) + "," + (height>>1) + "";
-      oldArr[4] = (nextX >= 0) ? "1,1" : "1,0";
-      $path.attr("d", oldArr.join(" "));
-      if (curStep > steps) {
-        curX = 0;
-        diffX = 0;
-        $path.attr("d", d);
-        currentPath = d;
-        if (handlers) handlers1();
-        if (callback) callback();
-        return;
-      }
-      requestAnimationFrame(animate);
-    }
-    animate();
-  }
-
-  function handlers1() {
-    $(document).on("mousedown touchstart", ".s-path", function(e) {
-      var startX =  e.pageX || e.originalEvent.touches[0].pageX;
-
-      $(document).on("mousemove touchmove", function(e) {
-        var x = e.pageX || e.originalEvent.touches[0].pageX;
-        diffX = x - startX;
-        if (diffX < 0) diffX = 0;
-        if (diffX > 300) diffX = 300;
-        curX = Math.floor(diffX/2);
-        $path.attr("d", newD(curX));
-      });
-    });
-
-    $(document).on("mouseup touchend", function() {
-      $(document).off("mousemove touchmove");
-      if (animating) return;
-      if (!diffX) return;
-      if (diffX < 40) {
-        animatePathD($path, newD(0), animTime, true);
-      } else {
-        animatePathD($path, finalD, animTime, false, function() {
-          $sCont.addClass("active");
-          setTimeout(function() {
-            $(document).on("click", closeSidebar);
-          }, sContTrans);
-        });
-      }
-    });
-
-  }
-
-  handlers1();
-
-  function closeSidebar(e) {
-    if ($(e.target).closest(".sidebar-content").length ||
-        $(e.target).closest(".chat").length) return;
-    if (animating) return;
-    animating = true;
-    $sCont.removeClass("active");
-    $chat.removeClass("active");
-    $(".cloned").addClass("removed");
-    finalX = -75;
-    setTimeout(function() {
-      animatePathD($path, midD, animTime/3, false, function() {
-        $chat.hide();
-        $(".cloned").remove();
-        finalX = 0;
-        curX = -75;
-        animatePathD($path, startD, animTime/3*2, true);
-        animating = false;
-      }, "inCubic");
-    }, sContTrans);
-    $(document).off("click", closeSidebar);
-  }
-
-  function moveImage(that) {
-    var $img = $(that).find(".contact__photo"),
-        top = $img.offset().top - demoTop,
-        left = $img.offset().left - demoLeft,
-        $clone = $img.clone().addClass("cloned");
-
-    $clone.css({top: top, left: left});
-    $demo.append($clone);
-    $clone.css("top");
-    $clone.css({top: "1.8rem", left: "25rem"});
-  }
-
-  function ripple(elem, e) {
-    var elTop = elem.offset().top,
-        elLeft = elem.offset().left,
-        x = e.pageX - elLeft,
-        y = e.pageY - elTop;
-    var $ripple = $("<div class='ripple'></div>");
-    $ripple.css({top: y, left: x});
-    elem.append($ripple);
-  }
-
-  $(document).on("click", ".contact", function(e) {
-    if (animating) return;
-    animating = true;
-    $(document).off("click", closeSidebar);
-    var that = this,
-        name = $(this).find(".contact__name").text(),
-        online = $(this).find(".contact__status").hasClass("online");
-    $(".chat__name").text(name);
-    // $(".chat__online").removeClass("active");
-	$('#chatbar').removeClass('isOnline');
-
-    if (online) {
-    	// $(".chat__online").addClass("active");
-    	$('#chatbar').addClass('isOnline');
-    }
-    ripple($(that),e);
-    setTimeout(function() {
-      $sCont.removeClass("active");
-      moveImage(that);
-      finalX = -80;
-      setTimeout(function() {
-        $(".ripple").remove();
-        animatePathD($path, clickMidD, animTime/3, false, function() {
-          curX = -80;
-          finalX = 0;
-          animatePathD($path, clickD, animTime*2/3, true, function() {
-            $chat.show();
-            $chat.css("top");
-            $chat.addClass("active");
-            animating = false;
-          });
-        }, "inCubic");
-      }, sContTrans);
-    }, sContTrans);
-  });
-
-  $(document).on("click", ".chat__back", function() {
-    if (animating) return;
-    animating = true;
-    $chat.removeClass("active");
-    $(".cloned").addClass("removed");
-    setTimeout(function() {
-      $(".cloned").remove();
-      $chat.hide();
-      finalX = 100;
-      animatePathD($path, clickMidDRev, animTime/3, false, function() {
-        curX = 100;
-        finalX = 0;
-        animatePathD($path, finalD, animTime*2/3, true, function() {
-          $sCont.addClass("active");
-          $(document).on("click", closeSidebar);
-          animating = false;
-        });
-      }, "inCubic");
-    }, sContTrans);
-  });
-
-  $(window).on("resize", function() {
-    demoTop = $demo.offset().top;
-    demoLeft = $demo.offset().left;
-  	height = $(window).height();
-  	updateChatbar();
-  });
-
-});
-//# sourceURL=pen.js
-</script>
-
+<script type="text/javascript" src="main.js"></script>
 </body></html>
