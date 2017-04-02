@@ -1,11 +1,11 @@
 $(document).ready(function() {
   var $svg = $(".sidebar"),
-      $demo = $(".demo"),
+      $chatBar = $(".chatBar"),
       $path = $(".s-path"),
       $sCont = $(".sidebar-content"),
       $chat = $(".chat"),
-      demoTop = $demo.offset().top,
-      demoLeft = $demo.offset().left,
+      chatBarTop = $chatBar.offset().top,
+      chatBarLeft = $chatBar.offset().left,
       diffX = 0,
       curX = 0,
       finalX = 0,
@@ -163,12 +163,12 @@ $(document).ready(function() {
 
   function moveImage(that) {
     var $img = $(that).find(".contact__photo"),
-        top = $img.offset().top - demoTop,
-        left = $img.offset().left - demoLeft,
+        top = $img.offset().top - chatBarTop,
+        left = $img.offset().left - chatBarLeft,
         $clone = $img.clone().addClass("cloned");
 
     $clone.css({top: top, left: left});
-    $demo.append($clone);
+    $chatBar.append($clone);
     $clone.css("top");
     $clone.css({top: "1.8rem", left: "25rem"});
   }
@@ -239,8 +239,8 @@ $(document).ready(function() {
   });
 
   $(window).on("resize", function() {
-    demoTop = $demo.offset().top;
-    demoLeft = $demo.offset().left;
+    chatBarTop = $chatBar.offset().top;
+    chatBarLeft = $chatBar.offset().left;
     updatePathHeight();
   });
 });
