@@ -1,37 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Chess Plus</title>
-  <link rel="stylesheet" type="text/css" href="/stylesheets/index.css">
-  <script type="text/javascript" src="/javascripts/index.js"></script>
-  <script type="text/javascript"></script>
-  <script src="/javascripts/jquery.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
-  <link rel='stylesheet prefetch' href='/stylesheets/jquery-ui.css'>
-  <script src="/javascripts/modernizr.js" type="text/javascript"></script>
-  <script src='/javascripts/jquery.min.js'></script>
-  <script src='/javascripts/jquery-ui.min.js'></script>
+    <title>Chess Plus</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/index.css">
+    <script type="text/javascript" src="/javascripts/index.js"></script>
+    <script type="text/javascript"></script>
+    <script src="/javascripts/jquery.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+            crossorigin="anonymous"></script>
+    <link rel='stylesheet prefetch' href='/stylesheets/jquery-ui.css'>
+    <script src="/javascripts/modernizr.js" type="text/javascript"></script>
+    <script src='/javascripts/jquery.min.js'></script>
+    <script src='/javascripts/jquery-ui.min.js'></script>
 </head>
 <body>
 
 <div class="background">
-  <img src="/images/king.png" class="king">
+    <img src="/images/king.png" class="king">
 
-  <div class="quoteBox">
-    <div class="quote">All that matters on the chessboard is good moves.</div>
-    <div class="author">-Bobby Fischer</div>
-  </div>
-  <div class="quoteBox">
-    <div class="quote">Avoid the crowd. Do your own thinking independently. Be the chess player, not the chess piece.</div>
-    <div class="author">-Ralph Charell</div>
-  </div>
-  <div class="quoteBox">
-    <div class="quote">Chess is a matter of delicate judgement, knowing when to punch and how to duck.</div>
-    <div class="author">-Bobby Fischer</div>
-  </div>
-  <div class="quoteBox">
-    <div class="quote">Chess is war over the board. The object is to crush the opponents mind.</div>
-    <div class="author">-Bobby Fischer</div>
-  </div>
+    <div class="quoteBox">
+        <div class="quote">All that matters on the chessboard is good moves.</div>
+        <div class="author">-Bobby Fischer</div>
+    </div>
+    <div class="quoteBox">
+        <div class="quote">Avoid the crowd. Do your own thinking independently. Be the chess player, not the chess
+            piece.
+        </div>
+        <div class="author">-Ralph Charell</div>
+    </div>
+    <div class="quoteBox">
+        <div class="quote">Chess is a matter of delicate judgement, knowing when to punch and how to duck.</div>
+        <div class="author">-Bobby Fischer</div>
+    </div>
+    <div class="quoteBox">
+        <div class="quote">Chess is war over the board. The object is to crush the opponents mind.</div>
+        <div class="author">-Bobby Fischer</div>
+    </div>
+    <fieldset>
+        <legend>Register</legend>
+        <form action="/register" method="post">
+            <label>First Name:<input type="text" required="required" name="firstName"></label><br>
+            <label>Last Name:<input type="text" required="required" name="lastName"></label><br>
+            <label>Age:<input type="number" min="3" required="required" name="age"></label><br>
+            <label>Username:<input type="text" required="required" name="username"></label><br>
+            <label>Email:<input type="text" required="required" name="email"></label><br>
+            <label>Password:<input type="password" required="required" name="password"></label><br>
+            <label>Profile picture:<input type="file" name="profilePicture"></label><br>
+            <input type="Submit">
+        </form>
+    </fieldset>
+    <fieldset title="Login">
+        <legend>Login</legend>
+        <form action="/login" method="post">
+            <label>Username:<input type="text" required="required" name="username"></label><br>
+            <label>Password:<input type="password" required="required" name="password"></label><br>
+            <input type="Submit">
+        </form>
+    </fieldset>
 </div>
 </body>
 </html>
