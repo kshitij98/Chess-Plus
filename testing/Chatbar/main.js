@@ -35,6 +35,7 @@ $(document).ready(function() {
   var updatePathHeight = function() {
     height = $(window).height();
     var d = $path.attr("d");
+    $path.attr({ "d": resizePath(d) });
     startD = resizePath(startD);
     midD = resizePath(midD);
     finalD = resizePath(finalD);
@@ -42,23 +43,22 @@ $(document).ready(function() {
     clickMidDRev = resizePath(clickMidDRev);
     clickD = resizePath(clickD);
     currentPath = resizePath(currentPath);
-    $path.attr({ "d": resizePath(d) });
   };
 
   var easings = {
     smallElastic: function(t,b,c,d) {
       var ts = (t/=d)*t;
       var tc = ts*t;
-      return b+c*(33*tc*ts + -106*ts*ts + 126*tc + -67*ts + 15*t);
+      return b + c * (33*tc*ts + -106*ts*ts + 126*tc + -67*ts + 15*t);
     },
     inCubic: function(t,b,c,d) {
-      var tc = (t/=d)*t*t;
-      return b+c*(tc);
+      var tc = (t/=d) * t * t;
+      return b + c*(tc);
     }
   };
 
   function createD(top, ax, dir) {
-    return "M0,0 " + top + ",0 a" + ax + "," + (height>>1) + " 0 1,"+dir+" 0," + height + " L0," + height;
+    return "M0,0 " + top + ",0 a" + ax + "," + (height>>1) + " 0 1," + dir + " 0," + height + " L0," + height;
   }
 
   function newD(num1, num2) {
@@ -89,7 +89,7 @@ $(document).ready(function() {
       nextTop = easingTop(curStep, oldTop, topDiff, steps);
       nextX = easingX(curStep, curX, finalX-curX, steps);
       oldArr[1] = nextTop + ",0";
-      oldArr[2] = "a" + Math.abs(nextX) + "," + (height>>1) + "";
+      oldArr[2] = "a" + Math.abs(nextX) + "," + (height>>1);
       oldArr[4] = (nextX >= 0) ? "1,1" : "1,0";
       $path.attr("d", oldArr.join(" "));
       if (curStep > steps) {
@@ -129,6 +129,7 @@ $(document).ready(function() {
       } else {
         animatePathD($path, finalD, animTime, false, function() {
           $sCont.addClass("active");
+          $('.contactsWrapper').addClass("active");
           setTimeout(function() {
             $(document).on("click", closeSidebar);
           }, sContTrans);
@@ -145,6 +146,7 @@ $(document).ready(function() {
     if (animating) return;
     animating = true;
     $sCont.removeClass("active");
+    $('.contactsWrapper').removeClass("active");
     $chat.removeClass("active");
     $(".cloned").addClass("removed");
     finalX = -75;
@@ -162,6 +164,7 @@ $(document).ready(function() {
   }
 
   function moveImage(that) {
+    $('.contact__photo, .contact__status, .unreadBadge').fadeOut(300).delay(300).fadeIn(300)
     var $img = $(that).find(".contact__photo"),
         top = $img.offset().top - chatBarTop,
         left = $img.offset().left - chatBarLeft,
@@ -170,21 +173,13 @@ $(document).ready(function() {
     $clone.css({top: top, left: left});
     $chatBar.append($clone);
     $clone.css("top");
-    $clone.css({top: "1.8rem", left: "25rem"});
-  }
-
-  function ripple(elem, e) {
-    var elTop = elem.offset().top,
-        elLeft = elem.offset().left,
-        x = e.pageX - elLeft,
-        y = e.pageY - elTop;
-    var $ripple = $("<div class='ripple'></div>");
-    $ripple.css({top: y, left: x});
-    elem.append($ripple);
+    $clone.css({top: "1.8rem", left: "1.4rem"});
+    $('.colourStatus').addClass('yes');
   }
 
   $(document).on("click", ".contact", function(e) {
     if (animating) return;
+    $('.cloned').remove();
     animating = true;
     $(document).off("click", closeSidebar);
     var that = this,
@@ -195,14 +190,14 @@ $(document).ready(function() {
 
     if (online)
       $('#chatbar').addClass('isOnline');
-    ripple($(that),e);
 
+    $('.chat__messages').scrollTop = $('.chat__messages').scrollTop.height;
     setTimeout(function() {
       $sCont.removeClass("active");
+      $('.contactsWrapper').removeClass("active");
       moveImage(that);
       finalX = -80;
       setTimeout(function() {
-        $(".ripple").remove();
         animatePathD($path, clickMidD, animTime/3, false, function() {
           curX = -80;
           finalX = 0;
@@ -211,17 +206,21 @@ $(document).ready(function() {
             $chat.css("top");
             $chat.addClass("active");
             animating = false;
+            $('.chat__messages').scrollTop($('.chat__messages')[0].scrollHeight);
           });
         }, "inCubic"); 
-      }, sContTrans);
+      }, 200);
     }, sContTrans);
   });
 
   $(document).on("click", ".chat__back", function() {
+    $('.cloned').remove();
     if (animating) return;
     animating = true;
     $chat.removeClass("active");
     $(".cloned").addClass("removed");
+    $('.colourStatus').removeClass('yes');
+    $('.cloned').remove();
     setTimeout(function() {
       $(".cloned").remove();
       $chat.hide();
@@ -231,6 +230,7 @@ $(document).ready(function() {
         finalX = 0;
         animatePathD($path, finalD, animTime*2/3, true, function() {
           $sCont.addClass("active");
+          $('.contactsWrapper').addClass("active");
           $(document).on("click", closeSidebar);
           animating = false;
         });
@@ -242,5 +242,13 @@ $(document).ready(function() {
     chatBarTop = $chatBar.offset().top;
     chatBarLeft = $chatBar.offset().left;
     updatePathHeight();
+  });
+
+  $('.chat__input').keyup(function(e) {
+    if(e.keyCode == 13) {
+      $('.chat__messages').append('<div class="chat__msgRow"><div class="chat__message mine">' + $('.chat__input').val() + '</div></div>');
+      $('.chat__input').val('');
+      $('.chat__messages').scrollTop($('.chat__messages')[0].scrollHeight);
+    }
   });
 });
