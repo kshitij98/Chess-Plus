@@ -1,0 +1,358 @@
+#+TITLE: MODELS
+
+* Introduction
+
+* User
+
+User has fields:
+- Name
+  - first name : /String/
+  - last name : /String/
+- email : /String/
+- username : /String/
+- password : /String/
+- rating : /Numeric/
+- age : /Numeric/
+- profile picture : /String/
+- sex : /{ Male, Female, Others}/
+- theme : /String/
+- friends : /Object IDs/
+- session count : /Nueric/
+- wins : /Numeric/
+- losses : /Numeric/
+- draws : /Numeric/
+- playing : /Boolean/
+
+
+=username= should be at least 8 characters in length and unique.
+=email= should have a structure of a valid email address. =theme= is
+a hexadecimal string.
+
+#+BEGIN_SRC javascript :tangle user.js
+
+// app/models/user.js
+// load the things we need
+var mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
+
+// define the schema for our user model
+var userSchema = mongoose.Schema({
+	firstName: {
+		type: String,
+		required: true
+	},
+	lastName: {
+		type: String,
+		required: true
+	},
+	username: {
+		type: String,
+		required: true,
+		unique: true
+	},
+	email: {
+		type: String,
+		required: true,
+		unique: true
+	},
+	password: {
+		type: String,
+		required: true
+	},
+	rating: {
+		type: Number,
+		required: true,
+		default: 100
+	},
+	age: {
+		type: Number,
+		required: true
+	},
+	profilePicture: {
+		type: String
+	},
+	sex: {
+		type: String
+	},
+	theme: {
+		type: String
+	},
+	friends: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: userSchema
+	}],
+	sessionCount: {
+		type: Number,
+		default: 0
+	},
+	wins: {
+		type: Number,
+		default: 0
+	},
+	loss: {
+		type: Number,
+		default: 0
+	},
+	draws: {
+		type: Number,
+		default: 0
+	},
+	playing: {
+		type: Boolean,
+		default: false
+	}
+});
+
+// methods
+// generating a hash
+userSchema.methods.generateHash = function(password) {
+	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+// checking if password is valid
+userSchema.methods.validPassword = function(password) {
+	return bcrypt.compareSync(password, this.password);
+};
+
+// create the model for users and expose it to our app
+module.exports = mongoose.model('User', userSchema);
+
+
+#+END_SRC
+
+
+* Game
+
+Game Schema has following properties:
+
+- First Player
+  - username : /String/
+  - color : /String/
+- Second Player
+  - username : 
+  - color : /String/
+- Status of Game : /String/
+- Running : /Boolean/
+
+=status= stores the *FEN String* status of the game.
+=isRunning= stores if the game is running or not.
+=firstPlayer= and =secondPlayer= stores th details
+of the /users/ currently playing.
+
+
+#+BEGIN_SRC javascript :tangle game.js
+
+// app/models/game.js
+// load the things we need
+var mongoose = require('mongoose');
+
+// define the schema for our game model
+var gameSchema = mongoose.Schema({
+	firstPlayer: {
+		username: {
+			type: String,
+			required: true
+		},
+		color: {
+			type: String,
+			required: true
+		}
+	},
+	secondPlayer: {
+		username: {
+			type: String,
+			default: null
+		},
+		color: {
+			type: String,
+			required: true
+		}
+	},
+	status: {
+		type: String,
+		default: '',
+	},
+	isRunning: {
+		type: Boolean,
+		default: false,
+		required: true
+	}
+});
+
+module.exports = mongoose.model('Game', gameSchema);
+
+#+END_SRC
+
+* Forgot
+
+This schema basically stores the requests of /reset password/.
+
+#+BEGIN_SRC javascript :tangle forgot.js
+
+// app/models/forgot.js
+// load the things we need
+var mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
+
+// define the schema for our user model
+var forgotSchema = mongoose.Schema({
+	username: {
+		type: String,
+		required: true,
+		unique: true
+	},
+	code: {
+		type: String,
+		required: true,
+		unique: true
+	},
+});
+
+// create the model for users and expose it to our app
+module.exports = mongoose.model('Forgot', forgotSchema);
+
+#+END_SRC
+
+* Challenges
+
+=challenges= schema stores the stores the /game challenge/ requests
+from =opponent1= to =opponent2=.
+
+#+BEGIN_SRC javascript :tangle challenges.js
+
+// app/models/challenges.js
+// load the things we need
+var mongoose = require('mongoose');
+
+// define the schema for our challenges model
+var challengeSchema = mongoose.Schema({
+	opponent1: {
+		type: String,
+		required: true
+	},
+	opponent2: {
+		type: String,
+		required: true
+	},
+	status: {
+		type: Number,
+		required: true,
+		default: 0
+	}
+	// status -> 0 : Challenge is not used yet
+	// status -> 1 : Challenge has been used or is no longer valid
+});
+
+// create the model for challenges and expose it to our app
+module.exports = mongoose.model('Challenge', challengeSchema);
+
+#+END_SRC
+
+* Friend Requests
+
+=request= Schema stores the friend requests from and to user.
+
+#+BEGIN_SRC javascript :tangle friendRequests.js
+
+// app/models/friendRequests.js
+// load the things we need
+var mongoose = require('mongoose');
+
+// define the schema for our requests model
+var requestSchema = mongoose.Schema({
+	first: {
+		type: String,
+		required: true
+	},
+	second: {
+		type: String,
+		required: true
+	},
+	status: {
+		type: Number,
+		required: true,
+		default: 0
+	}
+	//status = 0 -> request pending, users 
+	//status = 1 -> request accept, users are friends
+	//status = 2 -> request declined
+});
+
+// create the model for users and expose it to our app
+module.exports = mongoose.model('Request', requestSchema);
+
+#+END_SRC
+
+* Game Queue
+
+=gameQueue= schema implements /Quick Play/ feature.
+=opponent= stores the =username= of the users that currently
+want to play.
+
+#+BEGIN_SRC javascript :tangle gameQueue.js
+
+// app/models/gameQueues.js
+// load the things we need
+var mongoose = require('mongoose');
+
+// define the schema for our gameQueues model
+var gameQueueSchema = mongoose.Schema({
+	opponent: {
+		type: String,
+		required: true
+	},
+	status: {
+		type: Number,
+		required: true,
+		default: 0
+	}
+	// status -> 0 : Challenge is not used yet
+	// status -> 1 : Challenge has been used or is no longer valid
+});
+
+// create the model for game queue and expose it to our app
+module.exports = mongoose.model('GameQueue', gameQueueSchema);
+
+#+END_SRC
+
+* Message
+
+=message= schema stores the messages sent during app usage.
+=from= stores the sender and =to= stores the receiver.
+=time= is the time of sending and =read= stores that the message is read
+or not.
+
+#+BEGIN_SRC javascript :tangle message.js
+
+// app/models/message.js
+// load the things we need
+var mongoose = require('mongoose');
+
+// define the schema for our message model
+var messageSchema = mongoose.Schema({
+	from: {
+		type: String,
+		required: true
+	},
+	to: {
+		type: String,
+		required: true
+	},
+	message: {
+		type: String,
+		required: true
+	},
+	time: {
+		type: Date,
+		default: Date.now()
+	},
+	read: {
+		type: Boolean,
+		default: false
+	}
+});
+
+// create the model for messages and expose it to our app
+module.exports = mongoose.model('Message', messageSchema);
+
+#+END_SRC

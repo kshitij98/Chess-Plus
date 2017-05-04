@@ -1,0 +1,93 @@
+body .profileButton .tooltip {
+	content: ' ';
+	position: absolute;
+	z-index: 10;
+	top: -120px;
+	display: block;
+	visibility: hidden;
+	width: 152px;
+	height: 36px;
+	margin-left: -86px;
+	-webkit-transition: all .2s .2s ease-in;
+	transition: all .2s .2s ease-in;
+	-webkit-transform: translateY(-10px);
+	transform: translateY(-10px);
+	opacity: 0;
+	border-radius: 0px;
+	/*box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 1), 0 20px 80px 0 rgba(0, 0, 0, 1);*/
+}
+body .profileButton .tooltip:before {
+	position: absolute;
+	bottom: -9px;
+	display: block;
+	width: 0;
+	height: 0;
+	margin-left: 5px;
+	content: '';
+	-webkit-transition: .2s;
+	transition: .2s;
+	/*border: 5px solid rgba(157, 148, 148, 0.8);*/
+	/*background: transparent;*/
+}
+body .profileButton .tooltip:after {
+	position: absolute;
+	bottom: -81px;
+	left: 73%;
+	display: block;
+	width: 0;
+	height: 0;
+	margin-left: -5px;
+	content: ' ';
+	border: 5px solid white;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+	border-left-color: transparent;
+	background: transparent;
+}
+body .profileButton .tooltip a {
+	color: rgba(0, 0, 0, 0.6);
+	text-decoration: none;
+	float: left;
+	box-sizing: border-box;
+	padding: 7% 10px;
+	font-family: 'Montserrat', 'Helevtica', sans-serif;
+	/*background: white -webkit-linear-gradient(bottom, #d0cbcb 15%, #e9e5e5 100%);*/
+	/*background: white linear-gradient(bottom, #d0cbcb 15%, #e9e5e5 100%);*/
+	/*box-shadow: 1px 0 1px 0 rgba(0, 0, 0, 0.15) inset, -1px 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 1px 1px 0 rgba(255, 255, 255, 0.8) inset, 0 -1px 1px 0 rgba(157, 148, 148, 0.8) inset;*/
+	/*box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.6);*/
+	/*box-shadow: 0 -8px 6px -6px rgba(0, 0, 0, 0.6);*/
+}
+body .profileButton .tooltip > a{
+	/*box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.6);*/
+	box-shadow: 7px -7px 6px -6px rgba(0, 0, 0, 0.25), -7px -7px 6px -6px rgba(0, 0, 0, 0.25), 7px 7px 6px -6px rgba(0, 0, 0, 0.25), -7px 7px 6px -6px rgba(0, 0, 0, 0.25), 7px -7px 6px -6px rgba(0, 0, 0, 0.25), -7px -7px 6px -6px rgba(0, 0, 0, 0.25);
+}
+body .profileButton .tooltip > a ~ a{
+	/*box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.25);*/
+	box-shadow: 6px 7px 6px -6px rgba(0, 0, 0, 0.25), -6px 7px 6px -6px rgba(0, 0, 0, 0.25), 7px 7px 6px -6px rgba(0, 0, 0, 0.25), -7px 7px 6px -6px rgba(0, 0, 0, 0.25), 7px 0 6px -6px rgba(0, 0, 0, 0.25), -7px 0px 6px -6px rgba(0, 0, 0, 0.25);
+}
+body .profileButton .tooltip a {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	background: white;
+}
+body .profileButton .tooltip a:hover {
+	background: #ebebeb;
+	/*box-shadow: 1px 0 1px 0 rgba(0, 0, 0, 0.15) inset, -1px 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 1px 0 rgba(255, 255, 255, 0.8) inset, 0 -1px 1px 0 rgba(157, 148, 148, 0.8) inset;*/
+}
+body .profileButton:hover {
+	-webkit-transition: all .145s 0s ease-in;
+	transition: all .145s 0s ease-in;
+	/*background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.15) 0%, transparent 75%, rgba(0, 0, 0, 0.1) 110%);*/
+	/*background: linear-gradient(bottom, rgba(0, 0, 0, 0.15) 0%, transparent 75%, rgba(0, 0, 0, 0.1) 110%);*/
+	/*box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25) inset, 0 1px 1px 0 rgba(255, 255, 25, 0.08);*/
+}
+
+body .profileButton:hover .tooltip {
+	visibility: visible;
+	-webkit-transition: all .2s .1s ease-out;
+	transition: all .2s .1s ease-out;
+	-webkit-transform: translateY(0);
+	transform: translateY(0);
+	opacity: 1;
+}

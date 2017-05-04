@@ -1,0 +1,56 @@
+.circle-pic {
+    border-radius: 50%;
+    height: 9%;
+    float: left;
+    margin-right: 30px;
+}
+
+.circle-pic:hover {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.ctop{
+    margin-top: 3%;
+}
+
+.cbottom{
+    margin-bottom: 3%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.card {
+    background: #eeeeee;
+    border-radius: 5px;
+    display: inline-block;
+    height: 70%;
+    margin-top: 6%;
+    position: relative;
+    width: 83%;
+    padding: 5% 5% 5% 5%;
+}
+
+.card:hover {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.scrollable {
+    position: absolute;
+    width:100%;
+    top: 20pt;
+    bottom: 0;
+    overflow:auto;
+    /*border:1px solid #919191;*/
+}
+
+.matchStatus {
+    overflow: hidden;
+}
+
+.outerScroll {
+    position: absolute;
+    top: 13%;
+    width: 90%;
+    bottom: 5%;
+}

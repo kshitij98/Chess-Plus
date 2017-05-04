@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= user.firstName + ' ' + user.lastName %> | Chess Plus</title>
+
+	<!-- Fonts -->
+	<link rel='stylesheet prefetch' href='/fonts/open_sans.css'>
+	
+	<!-- jQuery, Socket.IO, snap.svg.js -->
+	<script src="/javascripts/jquery.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/javascripts/snap.svg-min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/normalize.css" />
+
+	<!-- ChatBar -->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/chatBar.css">
+	<script type="text/javascript" src="/javascripts/chatBar.js"></script>
+
+	<!-- Profile Page -->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/profilePage.css">
+	<script type="text/javascript" src="/javascripts/profilePage.js"></script>
+	<style type="text/css">
+		.card_circle::after {
+			background-image: url('/uploads/<%= user.profilePicture %>.jpg');
+		}
+	</style>
+
+	<!-- Profile Nav -->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/profileNav.css">
+
+    <!-- Snackbar -->
+    <script src="/javascripts/material.min.js"></script>
+		<link href="/stylesheets/searching.css" rel="stylesheet">
+		<script src="/javascripts/searching.js"></script>
+    <link rel="stylesheet" href="/stylesheets/toast.css">
+	<script type="text/javascript" src="/javascripts/snackbar.js"></script>
+	<!-- TODO: Compress these files. -->
+
+</head>
+<body>
+	<script type="text/javascript">var socket = io();</script>
+	<div class="background"></div>
+	<%- include chat.ejs %>
+
+		<div class="card transition">
+			<div class="hoverText">
+				<h2 class="transition hName"><%= user.firstName + ' ' + user.lastName %><br>
+					<small class="hUsername">@<%= user.username %></small><br>
+					<small id="rating_title" class="hExp"></small><br>
+					<small class="hRating"><%= user.rating %></small>
+				</h2>
+			</div>
+			<div class="card-profile_user-stats">
+	    	  <div class="stats-holder">
+	    	    <div class="user-stats">
+	    	      <strong>Wins</strong>
+	    	      <span><%= user.wins %></span>
+	    	    </div>
+	    	    <div class="user-stats">
+	    	      <strong>Draws</strong>
+	    	      <span><%= user.draws %></span>
+	    	    </div>
+	    	    <div class="user-stats">
+	    	      <strong>Defeats</strong>
+	    	      <span><%= user.loss %></span>
+	    	    </div>
+	    	  </div>
+	    	</div>
+	    	<% if (sameUser) { %>
+	    		<div class="cta-container transition"><a href="/logout" class="cta">Logout</a></div>
+	    	<% } %>
+	    	<% if (!sameUser) { %>
+		    	<% if (requestStatus === 0) { %>
+	    			<div class="cta-container transition"><a href="#" class="cta">Add Friend</a></div>
+		    	<% } %>
+		    	<% if (requestStatus === 1) { %>
+	    			<div class="cta-container transition"><a href="#" class="cta">Accept Friend Request</a></div>
+		    	<% } %>
+		    	<% if (requestStatus === 2) { %>
+	    			<div class="cta-container transition"><a href="#" class="cta">Friend Request Sent</a></div>
+		    	<% } %>
+		    	<% if (requestStatus === 3) { %>
+	    			<div class="cta-container transition"><a href="#" class="cta">Challenge</a></div>
+		    	<% } %>
+	    	<% } %>
+			<div class="card_circle transition">
+	    	<% if (sameUser) { %>			
+				<img class="edit" src="/images/edit.jpg" />
+				<form action='/updatePicture' enctype='multipart/form-data' method='post'>
+					<input type="file" id="uploadImage" name="profilePicture" accept="image/x-png,image/gif,image/jpeg" style="display: none;" onchange="this.form.submit()"/>
+				</form>
+	    	<% } %>
+			</div>
+		</div>
+		
+	<% var profilePicture= user.profilePicture %>
+	<% var name= user.name%>
+	<%- include profileNav.ejs %>
+	<%- include backButton.ejs %>
+	<%- include snackbar.ejs %>
+
+	<script type="text/javascript">
+		if(<%= user.rating %> < 1200){
+			$("#rating_title").html('Newbie');
+		}
+		else if(<%= user.rating %> < 1400){
+			$("#rating_title").html('Pupil');
+		}
+		else if(<%= user.rating %> < 1600){
+			$("#rating_title").html('Specialist');
+		}
+		else if(<%= user.rating %> < 1900){
+			$("#rating_title").html('Expert');
+		}
+		else if(<%= user.rating %> < 2200){
+			$("#rating_title").html('Candidate Master');
+		}
+		else if(<%= user.rating %> < 2300){
+			$("#rating_title").html('Master');
+		}
+		else if(<%= user.rating %> < 2400){
+			$("#rating_title").html('International Master');
+		}
+		else if(<%= user.rating %> < 2600){
+			$("#rating_title").html('GrandMaster');
+		}
+		else if(<%= user.rating %> < 2900){
+			$("#rating_title").html('International GrandMaster');
+		}
+		else{
+			$("#rating_title").html('Legendary GrandMaster');
+		}
+	</script>
+
+	<script>
+		var currStatus = <%= requestStatus %>;
+		// 0: Add Friend
+		// 1: Accept Friend Request
+		// 2: Friend Request Sent
+		// 3: Challenge
+
+		<% if (!sameUser) { %>
+		    <% if (requestStatus === 0) { %>
+				$('.cta').click(function() {
+					if (currStatus === 0) {
+						socket.emit('addFriend', "<%=user.username%>");
+						$('.cta').html('Friend Request Sent');
+						$('.cta').css({'background-color': '#848484', 'border': '2px solid #848484', 'pointer-events': 'none', 'cursor': 'default'});
+					}
+				});
+		    <% } %>
+		    <% if (requestStatus === 1) { %>
+				$('.cta').click(function() {
+					if (currStatus === 1) {
+						socket.emit('addFriend', "<%=user.username%>");
+						$('.cta').html('Challenge');
+						currStatus = 3;
+					}
+					else if (currStatus === 3) {
+						socket.emit('send challenge', "<%=user.username%>");
+					}
+				});
+		    <% } %>
+		    <% if (requestStatus === 2) { %>
+				$('.cta').css({'background-color': '#848484', 'border': '2px solid #848484', 'pointer-events': 'none', 'cursor': 'default'});
+		    <% } %>
+		    <% if (requestStatus === 3) { %>
+				$('.cta').click(function() {
+					socket.emit('send challenge', "<%=user.username%>");
+				});
+		    <% } %>
+		<% } %>
+
+		$(".edit").click(function() {
+			$("input[id='uploadImage']").click();
+		});
+
+	</script>
+</body>
+</html>

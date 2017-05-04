@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Friend Requests | Chess Plus</title>
+
+	<!-- Fonts -->
+	<link rel='stylesheet prefetch' href='/fonts/open_sans.css'>
+
+	<!-- jQuery, Socket.IO, snap.svg.js -->
+	<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+	<script src="/javascripts/jquery.min.js"></script>
+	<link rel="stylesheet" href="/stylesheets/friendRequests.css">
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/javascripts/snap.svg-min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/normalize.css" />
+
+	<!-- ChatBar -->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/chatBar.css">
+	<script type="text/javascript" src="/javascripts/chatBar.js"></script>
+
+    <!-- Snackbar -->
+    <script src="/javascripts/material.min.js"></script>
+		<link href="/stylesheets/searching.css" rel="stylesheet">
+		<script src="/javascripts/searching.js"></script>
+    <link rel="stylesheet" href="/stylesheets/toast.css">
+	<script type="text/javascript" src="/javascripts/snackbar.js"></script>
+	<!-- TODO: Compress these files. -->
+
+	<!-- Profile Nav -->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/profileNav.css">
+
+	<script type="text/javascript">
+		var socket = io();
+		var acceptRequest = function(user){
+			socket.emit('acceptRequest', user, '<%= user.username %>');
+			$('#container_'+user).remove();
+		}
+		var declineRequest = function(user){
+			socket.emit('declineRequest', user, '<%= user.username %>');
+			$('#container_'+user).remove();
+		}
+	</script>
+</head>
+<body>
+	<script type="text/javascript">var socket = io();</script>
+	<div class="background"></div>
+	<%- include chat.ejs %>
+	<div class="mainContent">
+		<div style="margin-top: 5%; margin-bottom: 5%">
+			<div class="innerwrap">
+				<section class="section1 clearfix">
+					<div>
+						<div class="row grid clearfix" align="center">
+							<div class="col2 first">
+								<img src="/uploads/_default.jpg" alt="">
+								<h1>@<%= user.username %></h1>
+								<p><%= user.email %></p>
+								<!--<span>Follow</span>-->
+							</div>
+							<div class="col2 last" align="center">
+								<h2 style="font-size: 300%">Friend Requests</h2>
+							</div>
+						</div>
+					</div>
+				</section>
+				<br>
+				<div align="center">
+					<% for (var i = 0; i < user.friendRequests.length ; i++){ %>
+					<div class="card" align="center" id="container_<%= user.friendRequests[i].username %>">
+						<h3><%= user.friendRequests[i].username %></h3>
+						<img src="/uploads/<%= user.friendRequests[i].profilePicture %>.jpg" alt="Avatar" class="circle-pic">
+						<br><br>
+						<button class="btn btn-success" onclick='acceptRequest("<%= user.friendRequests[i].username %>");'>Accept</button>&emsp;
+						<button class="btn btn-danger" onclick='declineRequest("<%= user.friendRequests[i].username %>");'>Decline</button>
+					</div>
+					<% } %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<% var profilePicture= user.profilePicture %>
+	<% var name= user.name%>
+	<% include backButton.ejs %>
+	<% include profileNav.ejs %>
+
+	<%- include snackbar.ejs %>
+</body>
+</html>

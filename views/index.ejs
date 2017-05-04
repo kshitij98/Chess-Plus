@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chess Plus</title>
+	<link rel='stylesheet prefetch' href='/stylesheets/jquery-ui.css'>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/index.css">
+	<script type="text/javascript"></script>
+	<script src="/javascripts/jquery.js"></script>
+	<script src="/javascripts/modernizr.js" type="text/javascript"></script>
+	<script src='/javascripts/jquery-ui.min.js'></script>
+	<script src='/javascripts/bootstrap.js'></script>
+	<script type="text/javascript" src="/javascripts/index.js"></script>
+	<script type="text/javascript" src="/javascripts/formvalidator.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
+</head>
+<body>
+<div class="background">
+	<h1 class="header">Chess Plus</h1>
+	<img src="/public/images/king.png" class="king">
+	<button class="btn btn-default mainButtons register" id="registerButton" data-toggle="modal" data-target="#login-modal">
+		<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" width="230" height="48" viewBox="0 0 229.99999 48.000001" version="1.1" class="mainButtonsSvg"><defs/><metadata/><g transform="translate(0,-1004.3622)"><g transform="matrix(2,0,0,2,182.80842,1004.3711)" ><path d="M3 17.25 3 21 6.75 21 17.81 9.94 14.06 6.19 3 17.25ZM20.71 7.04c0.39-0.39 0.39-1.02 0-1.41L18.37 3.29C17.98 2.9 17.35 2.9 16.96 3.29l-1.83 1.83 3.75 3.75 1.83-1.83z"/><path d="M0 0 24 0 24 24 0 24Z" fill="none"/></g><text xml:space="preserve" x="-2.757622" y="1043.0386" style="font-family:sans-serif;font-size:40px;font-style:normal;font-weight:normal;letter-spacing:0px;line-height:125%;word-spacing:0px"><tspan x="-2.757622" y="1043.0386" style="font-family:Roboto;font-stretch:normal;font-style:normal;font-variant:normal;font-weight:normal">REGISTER</tspan></text></g></svg>
+	</button>
+	<br/><br/>
+	<button class="btn btn-default mainButtons login" id="loginButton" data-toggle="modal" data-target="#login-modal">
+		<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" width="180" height="48" viewBox="0 0 180 48" version="1.1" class="mainButtonsSvg"><defs/><metadata/><g transform="translate(0,-1004.3622)"><g transform="matrix(2,0,0,2,127.42858,1004.4336)" ><path d="M2.01 21 23 12 2.01 3 2 10 17 12 2 14Z"/><path d="M0 0 24 0 24 24 0 24Z" fill="none"/></g><text xml:space="preserve" x="3.2142856" y="1042.7194" style="font-family:sans-serif;font-size:40px;font-style:normal;font-weight:normal;letter-spacing:0px;line-height:125%;word-spacing:0px"><tspan x="3.2142856" y="1042.7194" style="font-family:Roboto;font-stretch:normal;font-style:normal;font-variant:normal;font-weight:normal">LOGIN</tspan></text></g></svg>
+	</button>
+	<div class="quoteBox">
+		<div class="quote">All that matters on the chessboard is good moves.</div>
+		<div class="author">-Bobby Fischer</div>
+	</div>
+	<div class="quoteBox">
+		<div class="quote"> Avoid the crowd. Do your own thinking independently. Be the chess player, not the chess piece. </div>
+		<div class="author">-Ralph Charell</div>
+	</div>
+	<div class="quoteBox">
+		<div class="quote">Chess is a matter of delicate judgement, knowing when to punch and how to duck.</div>
+		<div class="author">-Bobby Fischer</div>
+	</div>
+	<div class="quoteBox">
+		<div class="quote">Chess is war over the board. The object is to crush the opponents mind.</div>
+		<div class="author">-Bobby Fischer</div>
+	</div>
+	<div class="container">
+	</div>
+	<div class="modal fade" id="loginBox" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" style="padding:35px 50px;">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
+				</div>
+				<div class="modal-body" style="padding:40px 50px;">
+					<form role="form" action="/login" method="post">
+						<input type="hidden" name="_csrf" value="<%= csrfTokenFromServer %>">
+						<div class="form-group">
+							<label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+							<input type="text" class="form-control" id="usrname" name="username" placeholder="Enter username">
+						</div>
+						<div class="form-group">
+							<label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+							<input type="password" class="form-control" id="psw" name="password" placeholder="Enter password">
+						</div>
+						<br/>
+						<br/>
+						<button type="submit" class="btn btn-success btn-block btn-lg giveColor">
+							<span class="glyphicon glyphicon-off"></span> Login
+						</button>
+					</form>
+				</div>
+				<!-- <div class="modal-footer">
+						<p>Not a member? <a href="#">Sign Up</a></p>
+						<p>Forgot <a href="#">Password?</a></p>
+				</div> -->
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="registerBox" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" style="padding:35px 50px;">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4><span class="glyphicon glyphicon-pencil"></span> Register at Chess Plus</h4>
+				</div>
+				<div class="modal-body" style="padding:40px 50px;">
+					<form role="form" action="/signup" method="post" id="register_form">
+						<input type="hidden" name="_csrf" value="<%= csrfTokenFromServer %>">
+						<div class="form-group">
+							<div class="form-group">
+								<label>
+									<span class="glyphicon glyphicon-font"></span> First Name:
+									<input type="text" required="required" name="firstName" placeholder="First Name" class="form-control">
+								</label>&emsp;
+								<label>
+									<span class="glyphicon glyphicon-bold"></span> Last Name:
+									<input type="text" required="required" name="lastName" placeholder="Last Name" class="form-control">
+								</label>
+								<br/>
+							</div>
+							<div class="form-group">
+								<label>
+									<span class="glyphicon glyphicon-user"></span> Username:
+									<input type="text" required="required" name="username" placeholder="Username" class="form-control">
+								</label>&emsp;
+								<label>
+									<span class="glyphicon glyphicon-eye-open"></span> Password:
+									<input type="password" required="required" name="password" placeholder="Password" class="form-control">
+								</label>
+								<br/>
+							</div>
+							<div class="form-group">
+								<label>
+									<span class="glyphicon glyphicon-envelope"></span> Email:
+									<input type="email" required="required" name="email" placeholder="Email" class="form-control">
+								</label>
+								<br/>
+							</div>
+							<div class="form-group">
+								<label>
+									<span class="glyphicon glyphicon-tree-conifer"></span> Age:
+									<input type="number" required="required" name="age" class="form-control">
+								</label> &emsp;
+								<label>
+									<span class="glyphicon glyphicon-tree-deciduous"></span> Sex:
+									<select name="sex" class="form-control">
+										<option value="Male">Male</option>
+										<option value="Female">Female</option>
+										<option value="Other">Other</option>
+									</select>
+								</label>
+								<br/>
+							</div>
+							<div class="form-group" style="text-align: center">
+							<br/>
+							</div>
+							<input id="themeChanger" type="hidden" name="theme" value="">
+						</div>
+						<br/>
+						<button type="submit" class="btn btn-success btn-block btn-lg giveColor">
+						<span class="glyphicon glyphicon-send"></span> Register
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

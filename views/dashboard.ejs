@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dashboard | Chess Plus</title>
+
+	<!-- Fonts -->
+	<link rel='stylesheet prefetch' href='/fonts/open_sans.css'>
+
+	<!-- jQuery, Socket.IO, snap.svg.js -->
+	<script src="/javascripts/jquery.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/javascripts/snap.svg-min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/normalize.css" />
+
+	<!-- ChatBar -->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/chatBar.css">
+	<script type="text/javascript" src="/javascripts/chatBar.js"></script>
+
+	<!-- Dashboard -->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/drawer.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/search.css">
+	<script type="text/javascript" src="/javascripts/dashboard.js"></script>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/dashboard.css" />
+	<script type="text/javascript" src="/javascripts/hovers.js"></script>
+
+    <!-- Snackbar -->
+    <script src="/javascripts/material.min.js"></script>
+		<link href="/stylesheets/searching.css" rel="stylesheet">
+		<script src="/javascripts/searching.js"></script>
+    <link rel="stylesheet" href="/stylesheets/toast.css">
+	<script type="text/javascript" src="/javascripts/snackbar.js"></script>
+	<!-- TODO: Compress these files. -->
+
+	<!-- Profile Nav -->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/profileNav.css">
+</head>
+
+<body>
+	<script type="text/javascript">var socket = io();</script>
+	<div id="snackbar">No user currently shares the same interests. ;)</div>
+	<div class="searching-text">Searching for an opponent...</div>
+	<div class="background"></div>
+	<%- include chat.ejs %>
+	<svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+		<circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+	</svg>
+	<div class="mainContent">
+		<div class="cover-dashboard">
+		</div>
+		<div class="searchBox">
+			<div class="title-container">
+				<h1 class="title">Search for a user.</h1>
+				<h1 class="title-down">Searching...</h1>
+			</div>
+			<fieldset class="field-container">
+				<input type="text" placeholder="Search" class="field" />
+				<div class="icons-container">
+					<div class="icon-search"></div>
+					<div class="icon-close">
+						<div class="x-up"></div>
+						<div class="x-down"></div>
+					</div>
+				</div>
+			</fieldset>
+
+			<div class='drawer'>
+				<div class='content'>
+				</div>
+			</div>
+		</div>
+
+		<section id="dashboard" class="dashboard clearfix">
+			<a href="#" data-path-hover="m 0,0 0,47.7775 c 24.580441,3.12569 55.897012,-8.199417 90,-8.199417 34.10299,0 65.41956,11.325107 90,8.199417 L 180,0 z" id="randomOpponent">
+				<figure>
+					<img src="images/1.png" />
+					<svg viewBox="0 0 180 320" preserveAspectRatio="none"><path d="m 0,0 0,171.14385 c 24.580441,15.47138 55.897012,24.75772 90,24.75772 34.10299,0 65.41956,-9.28634 90,-24.75772 L 180,0 0,0 z"/></svg>
+					<figcaption>
+						<h2>Quick Play</h2>
+						<p>Play against a random opponent.</p>
+						<button>Play</button>
+					</figcaption>
+				</figure>
+			</a>
+			<a href="#" data-path-hover="m 0,0 0,47.7775 c 24.580441,3.12569 55.897012,-8.199417 90,-8.199417 34.10299,0 65.41956,11.325107 90,8.199417 L 180,0 z" id="challengeFriend">
+				<figure>
+					<img src="images/2.png" />
+					<svg viewBox="0 0 180 320" preserveAspectRatio="none"><path d="m 0,0 0,171.14385 c 24.580441,15.47138 55.897012,24.75772 90,24.75772 34.10299,0 65.41956,-9.28634 90,-24.75772 L 180,0 0,0 z"/></svg>
+					<figcaption>
+						<h2>Challenge</h2>
+						<p>Play against a friend.</p>
+						<button>Play</button>
+					</figcaption>
+				</figure>
+			</a>
+			<a href='#' alt='Play against the computer.' id='startAIButton' data-path-hover="m 0,0 0,47.7775 c 24.580441,3.12569 55.897012,-8.199417 90,-8.199417 34.10299,0 65.41956,11.325107 90,8.199417 L 180,0 z">
+				<figure>
+					<img src="images/3.png" />
+					<svg viewBox="0 0 180 320" preserveAspectRatio="none"><path d="m 0,0 0,171.14385 c 24.580441,15.47138 55.897012,24.75772 90,24.75772 34.10299,0 65.41956,-9.28634 90,-24.75772 L 180,0 0,0 z"/></svg>
+					<figcaption>
+						<h2>Practice</h2>
+						<p>Play against the computer.</p>
+						<button>Play</button>
+					</figcaption>
+				</figure>
+			</a>
+		</section>
+	</div>
+	<% var profilePicture= user.profilePicture %>
+	<% var name= user.name%>
+	<% include profileNav.ejs %>
+
+	<%- include snackbar.ejs %>
+
+	<script type="text/javascript">
+		var opponent;
+		var sendChallengeRequest = function(username) {
+			console.log(username);
+			socket.emit('send challenge', username);
+		};
+	</script>
+
+</body>
+</html>

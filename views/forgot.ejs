@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Forgot Password</title>
+	<link rel='stylesheet prefetch' href='/stylesheets/jquery-ui.css'>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/index.css">
+	<script src="/javascripts/jquery.js"></script>
+	<script src="/javascripts/modernizr.js" type="text/javascript"></script>
+	<script src='/javascripts/jquery-ui.min.js'></script>
+	<script src='/javascripts/bootstrap.js'></script>
+	<script type="text/javascript" src="/javascripts/index.js"></script>
+</head>
+<body>
+<div class="background">
+	<img src="/public/images/king.png" class="king">
+	<form role="form" action="/forgot" method="post" style="position: absolute; top: 40%; left: 50%; width: 300px">
+		<input type="hidden" name="_csrf" value="<%= csrfTokenFromServer %>">		
+		<div class="form-group">
+			<label for="usrname" style="font-size: 20px"><span class="glyphicon glyphicon-user"></span> Username</label> 
+			<br /> <br />
+			<input type="text" class="form-control" id="usrname" name="username" placeholder="Enter username">
+		</div>
+		<br />
+		<button type="submit" class="btn btn-success btn-block btn-lg giveColor">
+			<span class="glyphicon glyphicon-off"></span> Submit
+		</button>
+	</form>
+
+
+	<div class="quoteBox">
+		<div class="quote">All that matters on the chessboard is good moves.</div>
+		<div class="author">-Bobby Fischer</div>
+	</div>
+	<div class="quoteBox">
+		<div class="quote"> Avoid the crowd. Do your own thinking independently. Be the chess player, not the chess piece. </div>
+		<div class="author">-Ralph Charell</div>
+	</div>
+	<div class="quoteBox">
+		<div class="quote">Chess is a matter of delicate judgement, knowing when to punch and how to duck.</div>
+		<div class="author">-Bobby Fischer</div>
+	</div>
+	<div class="quoteBox">
+		<div class="quote">Chess is war over the board. The object is to crush the opponents mind.</div>
+		<div class="author">-Bobby Fischer</div>
+	</div>
+</div>
+</body>
+</html>

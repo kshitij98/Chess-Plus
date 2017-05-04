@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+	<title>Chess Plus</title>
+
+	<!-- Fonts -->
+	<link rel='stylesheet prefetch' href='/fonts/open_sans.css'>
+	
+	<!-- jQuery, Socket.IO, snap.svg.js -->
+	<script src="/javascripts/jquery.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/javascripts/snap.svg-min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/normalize.css" />
+
+	<!-- Chessboard -->
+	<link rel="stylesheet" href="/stylesheets/chessboard-0.3.0.css"/>
+	<link rel="stylesheet" href="/stylesheets/chess.css">
+	<!-- <link rel="stylesheet" href="/stylesheets/chess2p.css"> -->
+	<script src="/javascripts/chessboard-0.3.0.min.js"></script>
+	
+	<!-- ChatBar -->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/chatBar.css">
+	<script type="text/javascript" src="/javascripts/chatBar.js"></script>
+
+	<!-- Profile Nav -->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/profileNav.css">
+</head>
+<body>
+	<script type="text/javascript">var socket = io();</script>
+	<div class="background"></div>
+	<%- include chat.ejs %>
+
+	<div class="mainContent">
+		<div id="board"></div>
+		<div id="promotion-dialog">
+			<ol id="promote-to">
+				<li class="ui-state-default"><span class="piece-name">q</span><img class="promotion-piece-q promotion-piece"/>
+				</li>
+				<li class="ui-state-default"><span class="piece-name">r</span><img class="promotion-piece-r promotion-piece"/>
+				</li>
+				<li class="ui-state-default"><span class="piece-name">n</span><img class="promotion-piece-n promotion-piece"/>
+				</li>
+				<li class="ui-state-default"><span class="piece-name">b</span><img class="promotion-piece-b promotion-piece"/>
+				</li>
+			</ol>
+		</div>
+	</div>
+
+	<div id="matchStats">
+		<!-- <img src="/images/kshitij.jpg" class="circle-pic ctop"> -->
+		<div class="player opp">
+			<div class="playerName"><%= second.name %></div>
+			<div class="playerUsername"> @<%= second.username %> </div>
+		</div>
+		<div class="player me">
+			<div class="playerName"> <%= first.name %> </div>
+			<div class="playerUsername"> @<%= first.username %> </div>
+		</div>
+		<img src="/uploads/<%=second.profilePicture%>.jpg" class="oppImage" />
+		
+		<% var profilePicture= first.profilePicture %>
+		<% var name= first.name %>
+		<% include profileNav.ejs %>
+
+		<div class="matchStatus">
+			<div id="status"></div>
+			<hr>
+			<div class="outerScroll">
+				<div class="scrollable">
+<!-- 				   <br>
+ -->					<table id="pgn">
+						<thead>
+						<th>
+							<td>No.</td><td>White</td><td>Black</td>
+						</th>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<audio id="moveAudio">
+		<source src="/sounds/move.mp3" type="audio/mpeg">
+		Your browser does not support the audio element.
+	</audio>
+
+<script src="/javascripts/chess.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/javascripts/jquery-ui.min.js"></script>
+<script type="text/javascript">
+	var myColor = '<%=myColor%>';
+	var pgnString = '<%=pgnString%>';
+	$('#nav_request').replaceWith('<a id="nav_forfeit" href="#" style="font-size: 15px; text-align: left ">Forfeit Game</a>');
+</script>
+<% if (playAI == 1) { %>
+<script src="/javascripts/chessai.js"></script>
+<% } %>
+<% if (playAI == 0) { %>
+<script src="/javascripts/chess2p.js"></script>	
+<% } %>
+</body>
+</html>
