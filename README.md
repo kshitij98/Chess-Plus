@@ -17,6 +17,12 @@ Libraries used:
 -	Passport
 -	passportSocketIo and many more...
 
+Screenshots
+-----------
+
+![Dashboard](https://raw.githubusercontent.com/kshitij98/Chess-Plus/master/public/images/screenshots/dashboard.png)
+![Profile Page](https://raw.githubusercontent.com/kshitij98/Chess-Plus/master/public/images/screenshots/profile.png)
+
 Requirements
 ------------
 
@@ -42,9 +48,3 @@ Features
 -	Rating system
 -	Play against random opponents
 -	User-friendly interface and many more...
-
-Screenshots
------------
-
-![Dashboard](https://raw.githubusercontent.com/kshitij98/Chess-Plus/master/public/images/screenshots/dashboard.png)
-![Profile Page](https://raw.githubusercontent.com/kshitij98/Chess-Plus/master/public/images/screenshots/profile.png)
