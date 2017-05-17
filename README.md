@@ -3,10 +3,11 @@ Chess Plus
 
 This project is an initiative to develop an Online Live Chess Game by Additya Popli, Devansh Gautam, Kshitij Gupta, Pratik Jain and Trunapushpa.
 
+
 Description
 -----------
 
-This project is built in Node.JS. This is a live online gaming platform.
+This project is a live online gaming platform built using node.js with mongoDb.
 
 Libraries used:
 -	Express
@@ -15,7 +16,23 @@ Libraries used:
 -   Stockfish
 -	Chessboard
 -	Passport
--	passportSocketIo and many more...
+-	passportSocketIo
+and much more.
+
+
+Features
+--------
+
+-	Real Time Chess with Friends.
+-	Chatting with friends.
+-	Quick play with a random opponent.
+-	Practice against Artificial Intelligence.
+-	Search for users.
+-	Send friend requests.
+-	Rating System based on match history.
+-	User-friendly Interface.
+and much more.
+
 
 Screenshots
 -----------
@@ -26,8 +43,9 @@ Screenshots
 Requirements
 ------------
 
-Node.js and npm instlled on the machine. MongoDB server setup on the machine. For deployment details see **deployment**
+node.js and npm must be installed on the machine. MongoDB server setup on the machine. For deployment details see **deployment**
 section.
+
 
 How To Run
 ----------
@@ -36,15 +54,3 @@ How To Run
 npm install
 node server.js
 ```
-
-Features
---------
-
--   Chat between friends
--	Play against friends
--   Play against AI
--	Search for users
--	Send friend requests
--	Rating system
--	Play against random opponents
--	User-friendly interface and many more...
