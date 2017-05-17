@@ -17,6 +17,7 @@ Libraries used:
 -	Chessboard
 -	Passport
 -	passportSocketIo
+
 and much more.
 
 
@@ -31,6 +32,7 @@ Features
 -	Send friend requests.
 -	Rating System based on match history.
 -	User-friendly Interface.
+
 and much more.
 
 
