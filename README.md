@@ -53,6 +53,11 @@ How To Run
 ----------
 
 ```javascript
+sudo apt-get install mongodb
+sudo service mongodb start
+
 npm install
 node server.js
+
+sudo service mongodb stop
 ```
